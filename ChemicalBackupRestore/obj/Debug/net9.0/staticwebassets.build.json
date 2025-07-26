@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "hWY/UZFBzs3983bpNxMMICMFKWUK1l6Oa46kOOxWUhE=",
+  "Source": "ChemicalBackupRestore",
+  "BasePath": "_content/ChemicalBackupRestore",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
