@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 
-public partial class TLVahed
+public partial class TLVahed : IBackupable
 {
     [Key]
     public required string IdLVahed { get; set; }
@@ -19,5 +19,6 @@ public partial class TLVahed
     public virtual ICollection<T_OnvanShoghli>? T_OnvanShoghli { get; set; }
     public virtual ICollection<TTags>? TTags { get; set; }
     public virtual ICollection<TTajhiz>? TTajhiz { get; set; }
+    public Guid BackupStatusId { get; set; }
 }
 

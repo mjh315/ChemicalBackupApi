@@ -16,9 +16,9 @@
 
 
     public int ID_Map_LocationsApp { get; set; }
-    public int T_Tajhiz_ID { get; set; }
-    public int T_Makan_ID { get; set; }
-    public int T_Vahed_Id { get; set; }
+    public int T_Tajhiz_IDApp { get; set; }
+    public int T_Makan_IDApp { get; set; }
+    public int T_Vahed_IdApp { get; set; }
 
 
 

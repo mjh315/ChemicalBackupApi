@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ChemicalBackupRestore")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+28883bfcb728904666f3a3479d05a1d8d6f39b3e")]
 [assembly: System.Reflection.AssemblyProductAttribute("ChemicalBackupRestore")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ChemicalBackupRestore")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

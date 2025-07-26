@@ -1,6 +1,6 @@
 ﻿
 
-public class TAllmadehTarkibiDto : IBackupable
+public class AllmadehTarkibiDto : IBackupable
 {
     public string? Darsad { get; set; }
     public string? MatterName { get; set; }

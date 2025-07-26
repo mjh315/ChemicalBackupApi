@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 public class CEIDto : IBackupable
 {
     public required string IdCEI { get; set; }
-    public int IdCEIApp { get; set; }
     public string? Zarf { get; set; }
     public int? QotrLole { get; set; }
     public int? QotrParegi { get; set; }
@@ -28,6 +27,8 @@ public class CEIDto : IBackupable
     public int? DansitehBokhar { get; set; }
 
 
+    public int IdCEIApp { get; set; }
+    public int TAllmadehIdApp { get; set; }
 
     
     // Haman BP dar jadval khavasFiziki
