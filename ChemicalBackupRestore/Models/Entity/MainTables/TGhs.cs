@@ -11,7 +11,8 @@ public partial class TGhs : IBackupable
 {
     [Key]
     public required string IdGhs { get; set; }
-
+    
+    // More Codes...
 
     [StringLength(250)]
     public string? Signal { get; set; }

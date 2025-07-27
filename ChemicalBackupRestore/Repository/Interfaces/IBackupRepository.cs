@@ -1,5 +1,3 @@
-using BazresiApi.DTO;
-
 public interface IBackupRepository
 {
     Task<ApiResponse<List<ConfigBackupResDto>>> GetAllBackupsAsync(int id);
