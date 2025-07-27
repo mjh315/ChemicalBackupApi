@@ -1,3 +1,4 @@
+
 # بکاپ سامانه شیمیایی
 
 
@@ -59,49 +60,175 @@
 ## ‌استفاده برای دیگر پروژه‌ها:
 شما به راحتی می‌توانید با اعمال تغییرات از این سرویس برای پروژه‌های خودتان استفاده کنید.
 مراحل انجام کار بدین شرح است:
--  افزودن جداول و برقراری ارتباط بین جداول:
-  1  نامگذاری جداول را براساس منطق زیر انجام می‌دهیم:
-  -  T_"main-table-name"
-  -  T_L_"Lookup-table-name"
-  -  T_M_"between-table-name"
-  2  برای هر جدول اقدامات زیر را انجام می‌دهیم:
-     - هر جدول را از IBackupable ارث‌بری می‌کنیم => با این کار می‌بایستی پراپرتی و navigation مربوط به این اینترفیس رو به پروژه اضافه کنی:
-       
+<details dir="rtl">
+
+<summary>افزودن جداول و برقراری ارتباط بین جداول:</summary>
+
+
+#### 1- نامگذاری جداول را براساس منطق زیر انجام می‌دهیم:
+  -  `T_"main-table-name"`
+  -  `T_L_"Lookup-table-name"`
+  -  `T_M_"between-table-name"`
+
+#### 2- برای هر جدول اقدامات زیر را انجام می‌دهیم:
+  
+- هر جدول را از IBackupable ارث‌بری می‌کنیم => با این کار می‌بایستی پراپرتی و navigation مربوط به این اینترفیس رو به پروژه اضافه کنی:
+     
+```C#       
 public Guid BackupStatusId { get; set; }
 [ForeignKey("BackupStatusId")]
 public virtual BackupStatus? BackupStatus { get; set; }
+```
 
-
-
-     - کلید اصلی را از نوع string قرار می دهیم
-       
+- کلید اصلی را از نوع **`string`** قرار می دهیم 
+```C# 
 public required string IdGhs { get; set; }
+````
 
-     - به ازای هر کلید خارجی یک پراپرتی با نام همان کلید خارجی  با پیشوند <code>"FK_"</code> و از نوع <code>string</code> ایجاد می‌کنیم (حتما از navigation ها هم استفاده میکنیم.)
-   
+
+- به ازای هر کلید خارجی یک پراپرتی با نام همان کلید خارجی  با پیشوند <code>"FK_"</code> و از نوع <code>string</code> ایجاد می‌کنیم (حتما از navigation ها هم استفاده میکنیم.)
+  
+```C# 
 public string? FK_TAllmadehId { get; set; }
 [ForeignKey("FK_TAllmadehId")]
 public virtual TAllmadeh? TAllmadeh { get; set; }
+```
 
--  ایجاد کلاس‌های dto بر اساس فایل‌های جداول[^2].
--  ایجاد Mapper برای هر جفت جدول و dto [3^].
-استفاده برای دیگر پروژه‌ها
-برای استفاده از این سرویس در پروژه‌های دیگر، مراحل زیر را دنبال کنید:
 
-افزودن جداول
-نام‌گذاری:
-T_"main-table-name"
-T_L_"lookup-table-name"
-T_M_"between-table-name"
-پیکربندی:
-از IBackupable ارث‌بری کنید و پراپرتی‌های زیر را اضافه کنید:
+
+- به ازای هرکلید داخلی و خارجی (که در مرحله گذشته نوع آنها را به `string` تغییر دادیم) یک پراپرتی از نوع int و به پیشوند `App` باشه:
+
+
+```C# 
+    public int IdGhsApp { get; set; }
+    public int TAllmadehIdApp { get; set; }
+```
+
+
+-  هر پراپرتی که بیانگر navigation است حتما باید از نوع `public virtual` باشه. اگر اینطور نباشه mapper به مشکل میخوره.
+</details>
+
+
+
+
+
+
+
+<details dir="rtl">
+
+<summary>ایجاد کلاس های dto:</summary>
+
+
+#### 1- محتوای فایل و نام‌گذاری فایل‌های کلاس‌های `dto` را بر اساس منطق زیر انجام می‌دهیم:
+
+  -  محتوای جدول را کامل کپی کرده و در فایل dto جایگذاری می‌کنیم همچنین ابتدای نام فایل جدول را حذف و به انتهای آن Dto اضافه می‌کنیم:
+
+
+  -  `T_"main-table-name"` => `"main-table-name"Dto`
+
+
+
+#### 2- همه ویژگی های `DataAnnotations` و `Navigation` به همراه همه `id`هایی که از نوع string هستند را حذف می‌کنیم:
+  
+
+     
+```C#
+//[Key]
+//public required string IdGhs { get; set; }
+//[StringLength(250)]
+public string? Signal { get; set; }
 public Guid BackupStatusId { get; set; }
-[ForeignKey("BackupStatusId")] public virtual BackupStatus? BackupStatus { get; set; }
-کلید اصلی را از نوع string تعریف کنید:
-public required string IdGhs { get; set; }
-برای کلیدهای خارجی، پراپرتی و ناوبگیشن بسازید:
-public string? FK_TAllmadehId { get; set; }
-[ForeignKey("FK_TAllmadehId")] public virtual TAllmadeh? TAllmadeh { get; set; }
-مراحل بعدی
+//[ForeignKey("BackupStatusId")]
+//public virtual BackupStatus? BackupStatus { get; set; }
+
+public int IdGhsApp { get; set; }
+public int TAllmadehIdApp { get; set; }
+    // More Codes...
+
+```
+
+
+#### 3- هر جدول را از `IBackupable` ارث‌بری می‌کنیم
+
+
+</details>
+
+
+
+<details dir="rtl">
+
+<summary>ایجاد فایل‌های Mapper:</summary>
+
+
+#### 1- نامگذاری `Mapper` را براساس منطق زیر انجام می‌دهیم:
+  -  `T_"main-table-name"` => `"main-table-name"Mapper`
+
+    
 
   
+#### 2- هر `Mapper` را از `AutoMapperProfile` ارث‌بری می‌کنیم
+
+
+#### 3- ساختار فایل `Mapper` را مانند نمونه کد زیر تنظیم می‌کنیم:
+
+
+```C# 
+public class GhsMapper : AutoMapperProfile
+{
+    public GhsMapper()
+    {
+        CreateMap<TGhs, GhsDto>();
+        CreateMap<GhsDto, TGhs>()
+        // id backup
+            .ForMember(dest => dest.BackupStatusId, act => act.MapFrom(src => src.BackupStatusId))
+            // id primary key
+            .ForMember(dest => dest.IdGhs, act => act.MapFrom(src => src.BackupStatusId.ToString() + "_ID:_" + src.IdGhsApp.ToString()))
+            //foreign keys
+            .ForMember(dest => dest.FK_TAllmadehId, act => act.MapFrom(src => src.BackupStatusId.ToString() + "_ID:_" + src.TAllmadehIdApp.ToString()));
+    }
+}
+````
+
+
+
+
+
+
+
+
+
+- 
+- کلید اصلی را از نوع **`string`** قرار می دهیم 
+```C# 
+public required string IdGhs { get; set; }
+````
+
+
+- به ازای هر کلید خارجی یک پراپرتی با نام همان کلید خارجی  با پیشوند <code>"FK_"</code> و از نوع <code>string</code> ایجاد می‌کنیم (حتما از navigation ها هم استفاده میکنیم.)
+  
+```C# 
+public string? FK_TAllmadehId { get; set; }
+[ForeignKey("FK_TAllmadehId")]
+public virtual TAllmadeh? TAllmadeh { get; set; }
+```
+
+
+
+- به ازای هرکلید داخلی و خارجی (که در مرحله گذشته نوع آنها را به `string` تغییر دادیم) یک پراپرتی از نوع int و به پیشوند `App` باشه:
+
+
+```C# 
+    public int IdGhsApp { get; set; }
+    public int TAllmadehIdApp { get; set; }
+```
+
+
+-  هر پراپرتی که بیانگر navigation است حتما باید از نوع `public virtual` باشه. اگر اینطور نباشه mapper به مشکل میخوره.
+</details>
+
+
+
+
+
+-  ایجاد Mapper برای هر جفت جدول و dto.
+استفاده برای دیگر پروژه‌ها
