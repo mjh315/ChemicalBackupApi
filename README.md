@@ -110,6 +110,7 @@ git clone https://github.com/mjh315]/ChemicalBackupApi.git
 > #### ✔ هر پراپرتی که بیانگر navigation است حتما باید از نوع `public virtual` باشه. اگر اینطور نباشه mapper به مشکل میخوره.
 >
 > #### ✔ حالا باید فایل BackupStatus.cs رو تغییر بدیم. بین این جدول و تمامی جداول دیگه که قراره بکاپ گرفته بشن رابطه یک به چند ایجاد کنید به صورتی که هر سطر جدول BackupStatus بتونه با چند سطر مابقی جداول ارتباط برقرار بکنه.
+>
 </details>
 
 
@@ -246,3 +247,30 @@ git clone https://github.com/mjh315]/ChemicalBackupApi.git
 >  
 
 </details>
+
+
+
+<details dir="rtl">
+
+<summary>5️⃣ تنظیمات فایل CleanupService.cs :</summary>
+
+
+> #### ✔ سوییچ موجود در سرویس را مانند نمونه به جهت حذف هر 35 دقیقه یکبار جداولی که بکاپ آنها ناقص است تکمیل کنید.
+>
+> 
+>    نمونه مقداردهی شده:
+>```C#
+>    // ...
+>        case "Ghs":
+>            var ghsRecs = context.Ghs.Where(i => i.BackupStatusId == record.IdBackup);
+>            context.Ghs.RemoveRange(ghsRecs);
+>            break;
+>    // ...
+>```
+>
+>  
+
+</details>
+
+> [!هشدار]  
+  حواستون باشه انظیمات دیتابیس رو توی فایل `appsettings.json` اعمال کنید.
