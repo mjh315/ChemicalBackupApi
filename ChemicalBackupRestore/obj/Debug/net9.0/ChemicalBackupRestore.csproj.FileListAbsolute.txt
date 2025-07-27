@@ -182,3 +182,5 @@ E:\mahdi\CodeAvaran\Backup Restore\Chemical\ChemicalBackupRestore\obj\Debug\net9
 E:\mahdi\CodeAvaran\Backup Restore\Chemical\ChemicalBackupRestore\obj\Debug\net9.0\ChemicalBackupRestore.pdb
 E:\mahdi\CodeAvaran\Backup Restore\Chemical\ChemicalBackupRestore\obj\Debug\net9.0\ChemicalBackupRestore.genruntimeconfig.cache
 E:\mahdi\CodeAvaran\Backup Restore\Chemical\ChemicalBackupRestore\obj\Debug\net9.0\ref\ChemicalBackupRestore.dll
+E:\mahdi\CodeAvaran\Backup Restore\Chemical\ChemicalBackupRestore\obj\Debug\net9.0\ChemicalBackupRestore.sourcelink.json
+E:\mahdi\CodeAvaran\Backup Restore\Chemical\ChemicalBackupRestore\bin\Debug\net9.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

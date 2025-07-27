@@ -40,7 +40,7 @@ public class TTags : IBackupable
 
 
     public string? FK_T_Tajhiz_ID { get; set; }
-    [ForeignKey("FK_T_Vaheds_ID")]
+    [ForeignKey("FK_T_Tajhiz_ID")]
     public virtual TTajhiz? T_Tajhiz { get; set; }
 
 

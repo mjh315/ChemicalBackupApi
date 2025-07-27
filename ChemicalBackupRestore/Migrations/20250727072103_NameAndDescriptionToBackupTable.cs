@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ChemicalBackupRestore.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class NameAndDescriptionToBackupTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -341,16 +341,17 @@ namespace ChemicalBackupRestore.Migrations
                     IdLVahedApp = table.Column<int>(type: "int", nullable: false),
                     TiletVahed = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Map_Name_File = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BackupStatusIdBackup = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    BackupStatusId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Vaheds", x => x.IdLVahed);
                     table.ForeignKey(
-                        name: "FK_Vaheds_BackupStatuses_BackupStatusIdBackup",
-                        column: x => x.BackupStatusIdBackup,
+                        name: "FK_Vaheds_BackupStatuses_BackupStatusId",
+                        column: x => x.BackupStatusId,
                         principalTable: "BackupStatuses",
-                        principalColumn: "IdBackup");
+                        principalColumn: "IdBackup",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -1358,7 +1359,7 @@ namespace ChemicalBackupRestore.Migrations
                     ID_TagApp = table.Column<int>(type: "int", nullable: false),
                     FK_T_Makan_ID = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     FK_T_Vaheds_ID = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    FK_T_Tajhiz_ID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FK_T_Tajhiz_ID = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     BackupStatusId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -1376,8 +1377,8 @@ namespace ChemicalBackupRestore.Migrations
                         principalTable: "T_Makan",
                         principalColumn: "ID_Makan");
                     table.ForeignKey(
-                        name: "FK_T_Tag_T_Tajhiz_FK_T_Vaheds_ID",
-                        column: x => x.FK_T_Vaheds_ID,
+                        name: "FK_T_Tag_T_Tajhiz_FK_T_Tajhiz_ID",
+                        column: x => x.FK_T_Tajhiz_ID,
                         principalTable: "T_Tajhiz",
                         principalColumn: "ID_Tajhiz");
                     table.ForeignKey(
@@ -1931,6 +1932,11 @@ namespace ChemicalBackupRestore.Migrations
                 column: "FK_T_Makan_ID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_T_Tag_FK_T_Tajhiz_ID",
+                table: "T_Tag",
+                column: "FK_T_Tajhiz_ID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_T_Tag_FK_T_Vaheds_ID",
                 table: "T_Tag",
                 column: "FK_T_Vaheds_ID");
@@ -1981,9 +1987,9 @@ namespace ChemicalBackupRestore.Migrations
                 column: "FK_TAllmadehId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Vaheds_BackupStatusIdBackup",
+                name: "IX_Vaheds_BackupStatusId",
                 table: "Vaheds",
-                column: "BackupStatusIdBackup");
+                column: "BackupStatusId");
         }
 
         /// <inheritdoc />

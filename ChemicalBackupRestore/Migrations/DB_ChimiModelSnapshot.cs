@@ -1232,7 +1232,7 @@ namespace ChemicalBackupRestore.Migrations
                     b.Property<string>("IdLVahed")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<Guid?>("BackupStatusIdBackup")
+                    b.Property<Guid>("BackupStatusId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("IdLVahedApp")
@@ -1248,7 +1248,7 @@ namespace ChemicalBackupRestore.Migrations
 
                     b.HasKey("IdLVahed");
 
-                    b.HasIndex("BackupStatusIdBackup");
+                    b.HasIndex("BackupStatusId");
 
                     b.ToTable("Vaheds");
                 });
@@ -1972,7 +1972,7 @@ namespace ChemicalBackupRestore.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("FK_T_Tajhiz_ID")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("FK_T_Vaheds_ID")
                         .HasColumnType("nvarchar(450)");
@@ -2002,6 +2002,8 @@ namespace ChemicalBackupRestore.Migrations
                     b.HasIndex("BackupStatusId");
 
                     b.HasIndex("FK_T_Makan_ID");
+
+                    b.HasIndex("FK_T_Tajhiz_ID");
 
                     b.HasIndex("FK_T_Vaheds_ID");
 
@@ -2799,7 +2801,9 @@ namespace ChemicalBackupRestore.Migrations
                 {
                     b.HasOne("BackupStatus", null)
                         .WithMany("TLVaheds")
-                        .HasForeignKey("BackupStatusIdBackup");
+                        .HasForeignKey("BackupStatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("TLogs", b =>
@@ -2986,7 +2990,7 @@ namespace ChemicalBackupRestore.Migrations
 
                     b.HasOne("TTajhiz", "T_Tajhiz")
                         .WithMany("TTags")
-                        .HasForeignKey("FK_T_Vaheds_ID");
+                        .HasForeignKey("FK_T_Tajhiz_ID");
 
                     b.HasOne("TLVahed", "T_Vaheds")
                         .WithMany("TTags")
