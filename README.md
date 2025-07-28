@@ -249,28 +249,5 @@ git clone https://github.com/mjh315]/ChemicalBackupApi.git
 </details>
 
 
-
-<details dir="rtl">
-
-<summary>5️⃣ تنظیمات فایل CleanupService.cs :</summary>
-
-
-> #### ✔ سوییچ موجود در سرویس را مانند نمونه به جهت حذف هر 35 دقیقه یکبار جداولی که بکاپ آنها ناقص است تکمیل کنید.
->
-> 
->    نمونه مقداردهی شده:
->```C#
->    // ...
->        case "Ghs":
->            var ghsRecs = context.Ghs.Where(i => i.BackupStatusId == record.IdBackup);
->            context.Ghs.RemoveRange(ghsRecs);
->            break;
->    // ...
->```
->
->  
-
-</details>
-
 > [!هشدار]  
   حواستون باشه انظیمات دیتابیس رو توی فایل `appsettings.json` اعمال کنید.
